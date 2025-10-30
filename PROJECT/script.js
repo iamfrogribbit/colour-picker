@@ -5,17 +5,19 @@ const clearButton = document.getElementById('clear-button');
 const colorWheel = document.getElementById('color-wheel');
 
 
-saveButton.addEventListener('click', () => {
+function save() {
     input = document.getElementById('input');
     colorBox.style.backgroundColor = input.value;
+    localStorage.setItem('savedColor', input.value)
+    localStorage.getItem('savedColor')
     input.value = '';
-})
+}
+
+saveButton.addEventListener('click', save)
 
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        input = document.getElementById('input');
-        colorBox.style.backgroundColor = input.value;
-        input.value = '';
+        save()
     }
 })
 
@@ -24,6 +26,13 @@ clearButton.addEventListener('click', () => {
     colorBox.style.backgroundColor = 'white';
 })
 
-colorWheel.addEventListener('click', () => {
+function firstLoad() {
+    input.value = localStorage.getItem('savedColor')
+    save()
+}
+
+firstLoad()
+
+// colorWheel.addEventListener('click', () => {
     
-})
+// })
